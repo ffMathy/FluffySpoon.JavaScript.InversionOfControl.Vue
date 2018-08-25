@@ -1,4 +1,4 @@
-`@fluffy-spoon/inverse-vue` is a Vue.js plugin that allows constructor dependency injection using the `[@fluffy-spoon/inverse](https://www.npmjs.com/package/@fluffy-spoon/inverse-vue)` framework.
+`@fluffy-spoon/inverse-vue` is a Vue.js plugin that allows constructor dependency injection using the [`@fluffy-spoon/inverse`](https://www.npmjs.com/package/@fluffy-spoon/inverse-vue) framework.
 
 # Installing
 `npm i @fluffy-spoon/inverse-vue --save`
