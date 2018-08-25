@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import Container, { Inject, Injectable } from '@fluffy-spoon/inverse';
+import { Container, Inject, Injectable } from '@fluffy-spoon/inverse';
 
 import Component from 'vue-class-component';
 import Vue from 'vue';

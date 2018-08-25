@@ -9,11 +9,17 @@ _To understand the following example, you have to be familiar with [`@fluffy-spo
 In the example below, we provide the plugin with the IOC container we want to use, define a component called `MyVueComponent` which injects a `Foo` as a dependency automatically. 
 
 ```typescript
-import Container from '@fluffy-spoon/inverse';
+import { Container, Inject, Injectable } from '@fluffy-spoon/inverse';
 import { VueInverse, VueInjectable } from '@fluffy-spoon/inverse-vue';
+
+import Component from 'vue-class-component';
+import Vue from 'vue';
 
 var container = new Container();
 Vue.usePlugin(VueInverse, container);
+
+@Injectable
+class Foo { }
 
 @Component({
     template: '<div></div>'
@@ -28,9 +34,6 @@ class MyVueComponent extends Vue {
         console.log('foo is injected - look:', foo);
     }
 }
-
-@Injectable
-class Foo { }
 ```
 
 Now if you provide `MyVueComponent` to Vue.js anywhere, it will always have its constructor parameters injected in.

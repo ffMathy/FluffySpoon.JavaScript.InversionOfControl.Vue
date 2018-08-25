@@ -27,16 +27,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var ava_1 = __importDefault(require("ava"));
-var inverse_1 = __importStar(require("@fluffy-spoon/inverse"));
+var inverse_1 = require("@fluffy-spoon/inverse");
 var vue_class_component_1 = __importDefault(require("vue-class-component"));
 var vue_1 = __importDefault(require("vue"));
 var index_1 = require("../src/index");
@@ -68,7 +61,7 @@ var VueClass = /** @class */ (function (_super) {
 }(vue_1.default));
 var container;
 ava_1.default.beforeEach(function () {
-    container = new inverse_1.default();
+    container = new inverse_1.Container();
     vue_1.default.use(index_1.VueInverse, container);
 });
 ava_1.default('can resolve VueClass', function (t) {
