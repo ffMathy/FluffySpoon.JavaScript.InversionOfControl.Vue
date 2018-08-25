@@ -6,21 +6,15 @@
 # Example
 _To understand the following example, you have to be familiar with `[@fluffy-spoon/inverse](https://www.npmjs.com/package/@fluffy-spoon/inverse-vue)` first._
 
-## Setting up the plugin
-To use the plugin, we must provide it with the IOC container we want to use.
+In the example below, we provide the plugin with the IOC container we want to use, define a component called `MyVueComponent` which injects a `Foo` as a dependency automatically. 
 
 ```typescript
 import Container from '@fluffy-spoon/inverse';
-import VueInversePlugin from '@fluffy-spoon/inverse-vue';
+import { VueInverse, VueInjectable } from '@fluffy-spoon/inverse-vue';
 
 var container = new Container();
-Vue.usePlugin(VueInversePlugin, { container });
-```
+Vue.usePlugin(VueInverse, container);
 
-## Using the plugin
-In the following usage scenario, we have a component called `MyVueComponent` which injects a `Foo` as a dependency.
-
-```typescript
 @Component({
     template: '<div></div>'
 })
@@ -39,4 +33,4 @@ class MyVueComponent extends Vue {
 class Foo { }
 ```
 
-Voila! Now if you provide `MyVueComponent` to Vue.js anywhere, it will always have its constructor parameters injected in.
+Now if you provide `MyVueComponent` to Vue.js anywhere, it will always have its constructor parameters injected in.

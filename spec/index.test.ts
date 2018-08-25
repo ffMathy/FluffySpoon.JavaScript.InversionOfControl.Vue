@@ -5,7 +5,7 @@ import Container, { Inject, Injectable } from '@fluffy-spoon/inverse';
 import Component from 'vue-class-component';
 import Vue from 'vue';
 
-import VueInverse, { VueInjectable } from '../src/index';
+import { VueInverse, VueInjectable } from '../src/index';
  
 @Injectable
 class Foo {
@@ -28,9 +28,7 @@ let container: Container;
 
 test.beforeEach(() => {
     container = new Container();
-    Vue.use(VueInverse, {
-        container
-    });
+    Vue.use(VueInverse, container);
 });
 
 test('can resolve VueClass', t => {

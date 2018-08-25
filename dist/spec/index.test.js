@@ -39,7 +39,7 @@ var ava_1 = __importDefault(require("ava"));
 var inverse_1 = __importStar(require("@fluffy-spoon/inverse"));
 var vue_class_component_1 = __importDefault(require("vue-class-component"));
 var vue_1 = __importDefault(require("vue"));
-var index_1 = __importStar(require("../src/index"));
+var index_1 = require("../src/index");
 var Foo = /** @class */ (function () {
     function Foo() {
     }
@@ -69,9 +69,7 @@ var VueClass = /** @class */ (function (_super) {
 var container;
 ava_1.default.beforeEach(function () {
     container = new inverse_1.default();
-    vue_1.default.use(index_1.default, {
-        container: container
-    });
+    vue_1.default.use(index_1.VueInverse, container);
 });
 ava_1.default('can resolve VueClass', function (t) {
     var instance = new VueClass();
