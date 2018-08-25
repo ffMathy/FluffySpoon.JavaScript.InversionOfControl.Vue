@@ -6,7 +6,7 @@
 # Example
 _To understand the following example, you have to be familiar with [`@fluffy-spoon/inverse`](https://www.npmjs.com/package/@fluffy-spoon/inverse-vue) first._
 
-In the example below, we provide the plugin with the IOC container we want to use, define a component called `MyVueComponent` which injects a `Foo` as a dependency automatically. 
+In the example below, we provide the plugin with the IOC container we want to use and define a component called `MyVueComponent` which injects a `Foo` as a dependency automatically. 
 
 ```typescript
 import { Container, Inject, Injectable } from '@fluffy-spoon/inverse';
