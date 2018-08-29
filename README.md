@@ -16,7 +16,7 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 
 var container = new Container();
-Vue.usePlugin(VueInverse, container);
+Vue.use(VueInverse, container);
 
 @Injectable
 class Foo { }
