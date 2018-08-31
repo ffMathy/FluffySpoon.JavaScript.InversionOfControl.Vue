@@ -13,11 +13,11 @@
     "devDependencies": {
         "ava": "^0.25.0",
         "ts-node": "^7.0.1",
-        "typescript": "^3.0.1",
+        "typescript": "^3.0.3",
         "vue-class-component": "^6.2.0"
     },
     "dependencies": {
-        "@fluffy-spoon/inverse": "^1.0.20",
+        "@fluffy-spoon/inverse": "^1.0.28",
         "reflect-metadata": "^0.1.12",
         "vue": "^2.5.17"
     },

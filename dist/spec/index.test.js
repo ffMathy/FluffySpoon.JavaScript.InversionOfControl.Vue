@@ -33,6 +33,7 @@ var inverse_1 = require("@fluffy-spoon/inverse");
 var vue_class_component_1 = __importDefault(require("vue-class-component"));
 var vue_1 = __importDefault(require("vue"));
 var index_1 = require("../src/index");
+var container;
 var Foo = /** @class */ (function () {
     function Foo() {
     }
@@ -42,6 +43,21 @@ var Foo = /** @class */ (function () {
     ], Foo);
     return Foo;
 }());
+var ClassWithoutDependenciesBase = /** @class */ (function () {
+    function ClassWithoutDependenciesBase() {
+    }
+    return ClassWithoutDependenciesBase;
+}());
+var ClassWithoutDependencies = /** @class */ (function (_super) {
+    __extends(ClassWithoutDependencies, _super);
+    function ClassWithoutDependencies() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    ClassWithoutDependencies = __decorate([
+        inverse_1.Injectable
+    ], ClassWithoutDependencies);
+    return ClassWithoutDependencies;
+}(ClassWithoutDependenciesBase));
 var VueBaseClass = /** @class */ (function (_super) {
     __extends(VueBaseClass, _super);
     function VueBaseClass(foo) {
@@ -69,7 +85,14 @@ var VueClass = /** @class */ (function (_super) {
     ], VueClass);
     return VueClass;
 }(VueBaseClass));
-var container;
+var DummyVueClass = /** @class */ (function () {
+    function DummyVueClass() {
+    }
+    DummyVueClass = __decorate([
+        index_1.VueInjectable
+    ], DummyVueClass);
+    return DummyVueClass;
+}());
 ava_1.default.beforeEach(function () {
     container = new inverse_1.Container();
     vue_1.default.use(index_1.VueInverse, container);
@@ -78,6 +101,28 @@ ava_1.default('can resolve VueClass', function (t) {
     var instance = container.resolveInstance(VueClass);
     t.true(instance instanceof VueClass);
     t.true(instance.foo instanceof Foo);
+});
+ava_1.default('can resolve VueBaseClass resolved as VueClass', function (t) {
+    container.whenResolvingType(VueBaseClass).useType(VueClass);
+    var instance = container.resolveInstance(VueBaseClass);
+    t.false(instance instanceof DummyVueClass);
+    t.true(instance instanceof VueClass);
+    t.true(instance instanceof VueBaseClass);
+    t.true(instance.foo instanceof Foo);
+});
+ava_1.default('can create VueBaseClass resolved as VueClass with injected dependencies', function (t) {
+    var instance = new VueClass();
+    t.false(instance instanceof DummyVueClass);
+    t.true(instance instanceof VueClass);
+    t.true(instance instanceof VueBaseClass);
+    t.true(instance.foo instanceof Foo);
+});
+ava_1.default('can create ClassWithoutDependenciesBase resolved as ClassWithoutDependencies', function (t) {
+    container.whenResolvingType(ClassWithoutDependenciesBase).useType(ClassWithoutDependencies);
+    var instance = new (container.resolveType(ClassWithoutDependenciesBase))();
+    t.false(instance instanceof DummyVueClass);
+    t.true(instance instanceof ClassWithoutDependencies);
+    t.true(instance instanceof ClassWithoutDependenciesBase);
 });
 ava_1.default('can create VueClass with injected dependencies', function (t) {
     var instance = new VueClass();
