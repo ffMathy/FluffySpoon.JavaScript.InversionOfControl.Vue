@@ -23,8 +23,9 @@ var Utilities_1 = require("@fluffy-spoon/inverse/dist/src/Utilities");
 var vue_1 = __importDefault(require("vue"));
 function VueInjectable(cls) {
     var parameterTypesMetadata = Decorators_1.getParameterTypesMetadata(cls);
+    var className = Utilities_1.extractClassName(cls);
     if (!parameterTypesMetadata)
-        throw new Error('A @VueInjectable decorator must be defined after other decorators that alter class metadata for the class ' + Utilities_1.extractClassName(cls) + '. If in doubt, re-order the decorators so that the @VueInjectable decorator is last.');
+        throw new Error('Could not find metadata for the class ' + className + '.\nPotential causes:\n-> The @VueInjectable decorator was defined before other decorators that alter class metadata.\n-> The class extends a mixin class. Mixins are not currently supported.\n-> You do not have any arguments to inject in the constructor that have been decorated with @Inject.\n');
     var injectableClass = /** @class */ (function (_super) {
         __extends(class_1, _super);
         function class_1() {

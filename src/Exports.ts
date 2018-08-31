@@ -7,10 +7,11 @@ import { getOrCreateArgumentsMetadataForTarget, extractClassName,  } from '@fluf
 
 import Vue, { PluginObject, VueConstructor } from 'vue';
 
-export function VueInjectable<T extends { new(...args: any[]): any }>(cls: T) {
+export function VueInjectable<T extends { new(...args: any[]): any }>(cls: T): T {
     const parameterTypesMetadata = getParameterTypesMetadata(cls);
+    const className = extractClassName(cls);
     if(!parameterTypesMetadata)
-        throw new Error('A @VueInjectable decorator must be defined after other decorators that alter class metadata for the class ' + extractClassName(cls) + '. If in doubt, re-order the decorators so that the @VueInjectable decorator is last.');
+        throw new Error('Could not find metadata for the class ' + className + '.\nPotential causes:\n-> The @VueInjectable decorator was defined before other decorators that alter class metadata.\n-> The class extends a mixin class. Mixins are not currently supported.\n-> You do not have any arguments to inject in the constructor that have been decorated with @Inject.\n');
 
     var injectableClass = class extends cls {
         constructor(..._args: any[]) {

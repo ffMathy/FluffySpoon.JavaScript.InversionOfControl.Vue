@@ -42,29 +42,44 @@ var Foo = /** @class */ (function () {
     ], Foo);
     return Foo;
 }());
-var VueClass = /** @class */ (function (_super) {
-    __extends(VueClass, _super);
-    function VueClass(foo) {
+var VueBaseClass = /** @class */ (function (_super) {
+    __extends(VueBaseClass, _super);
+    function VueBaseClass(foo) {
         var _this = _super.call(this) || this;
         _this.foo = foo;
         return _this;
+    }
+    VueBaseClass = __decorate([
+        index_1.VueInjectable,
+        __param(0, inverse_1.Inject),
+        __metadata("design:paramtypes", [Foo])
+    ], VueBaseClass);
+    return VueBaseClass;
+}(vue_1.default));
+var VueClass = /** @class */ (function (_super) {
+    __extends(VueClass, _super);
+    function VueClass() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     VueClass = __decorate([
         vue_class_component_1.default({
             template: '<div></div>'
         }),
-        index_1.VueInjectable,
-        __param(0, inverse_1.Inject),
-        __metadata("design:paramtypes", [Foo])
+        index_1.VueInjectable
     ], VueClass);
     return VueClass;
-}(vue_1.default));
+}(VueBaseClass));
 var container;
 ava_1.default.beforeEach(function () {
     container = new inverse_1.Container();
     vue_1.default.use(index_1.VueInverse, container);
 });
 ava_1.default('can resolve VueClass', function (t) {
+    var instance = container.resolveInstance(VueClass);
+    t.true(instance instanceof VueClass);
+    t.true(instance.foo instanceof Foo);
+});
+ava_1.default('can create VueClass with injected dependencies', function (t) {
     var instance = new VueClass();
     t.true(instance.foo instanceof Foo);
 });

@@ -37,3 +37,6 @@ class MyVueComponent extends Vue {
 ```
 
 Now if you provide `MyVueComponent` to Vue.js anywhere, it will always have its constructor parameters injected in.
+
+# Special notes
+`@fluffy-spoon/inverse-vue` does not support classes that extend from mixins.
