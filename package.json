@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@fluffy-spoon/inverse": "^1.0.28",
-        "reflect-metadata": "^0.1.12",
+        "reflect-metadata": "^0.1.13",
         "vue": "^2.5.17"
     },
     "ava": {
