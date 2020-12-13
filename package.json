@@ -17,7 +17,7 @@
         "vue-class-component": "^6.2.0"
     },
     "dependencies": {
-        "@fluffy-spoon/inverse": "^1.0.28",
+        "@fluffy-spoon/inverse": "^1.35.0",
         "reflect-metadata": "^0.1.12",
         "vue": "^2.5.17"
     },
